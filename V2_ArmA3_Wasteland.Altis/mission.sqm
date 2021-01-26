@@ -2961,7 +2961,7 @@ class Mission
 					name="Parking6_spawn";
 					type="Empty";
 					colorName="ColorBlack";
-					angle=215.59109;
+					angle=215.59106;
 					id=427;
 				};
 				class Item12
