@@ -9,12 +9,20 @@
 #define groupManagementKickButton 55515
 #define groupManagementDisbandButton 55516
 #define groupManagementLeaveButton 55517
+#define groupManagementNameButton 55521
+#define groupManagementNameInput_IDC 55522
 
 class GroupManagement {
 
 	idd = groupManagementDialog;
 	movingEnable = true;
 	enableSimulation = true;
+
+	#define Atm_TEXT_SIZE (0.04 * TEXT_SCALE)
+
+    class AtmLabelText : w_RscText {
+        sizeEx = Atm_TEXT_SIZE;
+    };
 
 	class controlsBackground {
 
@@ -28,7 +36,7 @@ class GroupManagement {
 
 		class MainTitle : w_RscText {
 			idc = -1;
-			text = "Group Management";
+			text = "GRUPOS";
 			sizeEx = 0.04;
 			shadow = 2;
 			x = 0.260; y = 0.112;
@@ -37,7 +45,7 @@ class GroupManagement {
 
 		class InviteTitleText : w_RscText {
 			idc = -1;
-			text = "Players";
+			text = "JOGADORES";
 			sizeEx = 0.025;
 			shadow = 2;
 			x = 0.0875; y = 0.155;
@@ -46,7 +54,7 @@ class GroupManagement {
 
 		class GroupTitleText : w_RscText {
 			idc = -1;
-			text = "Your Group";
+			text = "Seu Grupo";
 			sizeEx = 0.025;
 			shadow = 2;
 			x = 0.5575; y = 0.155;
@@ -70,7 +78,7 @@ class GroupManagement {
 
 		class CloseButton : w_RscButton {
 			idc = -1;
-			text = "Close";
+			text = "FECHAR";
 			onButtonClick = "closeDialog 0;";
 			x = 0.02; y = 0.68;
 			w = 0.125; h = 0.033 * safezoneH;
@@ -88,7 +96,7 @@ class GroupManagement {
 
 		class PromotePlayerButton : w_RscButton {
 			idc = groupManagementPromoteButton;
-			text = "Promote";
+			text = "Promover";
 			onButtonClick = "[] execVM 'client\systems\groups\promotePlayer.sqf'";
 			x = 0.3075; y = 0.200;
 			w = 0.125; h = 0.033 * safezoneH;
@@ -97,7 +105,7 @@ class GroupManagement {
 
 		class InviteButton : w_RscButton {
 			idc = groupManagementInviteButton;
-			text = "Invite";
+			text = "Convidar";
 			onButtonClick = "[] execVM 'client\systems\groups\inviteToGroup.sqf'";
 			x = 0.3075; y = 0.250;
 			w = 0.125; h = 0.033 * safezoneH;
@@ -106,7 +114,7 @@ class GroupManagement {
 
 		class KickButton : w_RscButton {
 			idc = groupManagementKickButton;
-			text = "Kick";
+			text = "Expulsar";
 			onButtonClick = "[] execVM 'client\systems\groups\kickFromGroup.sqf'";
 			x = 0.3075; y = 0.300;
 			w = 0.125; h = 0.033 * safezoneH;
@@ -115,7 +123,7 @@ class GroupManagement {
 
 		class DisbandButton : w_RscButton {
 			idc = groupManagementDisbandButton;
-			text = "Disband";
+			text = "Dispensar";
 			onButtonClick = "[] execVM 'client\systems\groups\disbandGroup.sqf'";
 			x = 0.3075; y = 0.350;
 			w = 0.125; h = 0.033 * safezoneH;
@@ -124,12 +132,29 @@ class GroupManagement {
 
 		class LeaveButton : w_RscButton {
 			idc = groupManagementLeaveButton;
-			text = "Leave Group";
+			text = "Sair do Grupo";
 			onButtonClick = "[] execVM 'client\systems\groups\leaveGroup.sqf'";
 			x = 0.3075; y = 0.350;
 			w = 0.125; h = 0.033 * safezoneH;
 			color[] = {0.95,0.1,0.1,1};
 		};
+
+		class NameInput : RscEdit
+        {
+            idc = groupManagementNameInput_IDC;
+            text = "";
+            sizeEx = Atm_TEXT_SIZE;
+            x = 0.17; y = 0.662;
+			w = 0.200; h = 0.033 * safezoneH;
+        };
+
+        class NameButton : w_RscButton {
+            idc = groupManagementNameButton;
+            text = "Mudar nome do grupo";
+            onButtonClick = "[] execVM 'client\systems\groups\NameGroup.sqf'";
+            x = 0.38; y = 0.662;
+            w = 0.225; h = 0.033 * safezoneH;
+        };
 	};
 
 };

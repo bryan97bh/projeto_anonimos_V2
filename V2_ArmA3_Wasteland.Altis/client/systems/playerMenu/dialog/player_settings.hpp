@@ -18,90 +18,92 @@ class playerSettings {
 			colorBackground[] = {0,0,0,0.6};
 
 			moving = true;
-			x = 0.0; y = 0.1;
-			w = .745; h = 0.65;
+			x = 0.0125;
+			y = 0.04;
+			w = 0.9625;
+			h = 0.92;
 		};
 
-		class TopBar: IGUIBack
-		{
+		class TopBar: IGUIBack {
 			idc = -1;
 			colorText[] = {1, 1, 1, 1};
 			colorBackground[] = {A3W_UICOLOR_R, A3W_UICOLOR_G, A3W_UICOLOR_B, 0.8};
 
-			x = 0;
-			y = 0.1;
-			w = 0.745;
-			h = 0.05;
+			x = 0.0125;
+			y = 0.04;
+			w = 0.9625;
+			h = 0.08;
 		};
 
 		class MainTitle : w_RscText {
 			idc = -1;
-			text = "Player Inventory";
+			text = "Player Menu";
 			sizeEx = 0.04;
 			shadow = 2;
-			x = 0.260; y = 0.1;
-			w = 0.3; h = 0.05;
+			x = 0.4125;
+			y = 0.04;
+			w = 0.25;
+			h = 0.06;
 		};
 
-		class waterIcon : w_RscPicture {
+		class moneyIcon : w_RscText {
 			idc = -1;
-			text = "client\icons\water.paa";
-			x = 0.022; y = 0.2;
-			w = 0.04 / (4/3); h = 0.04;
+			text = "Dinheiro:";
+			sizeEx = 0.04;
+			x = 0.025;
+			y = 0.14;
+			w = 0.1;
+			h = 0.06;
 		};
 
-		class foodIcon : w_RscPicture {
+		class serverLogo : w_RscPicture {
 			idc = -1;
-			text = "client\icons\food.paa";
-			x = 0.022; y = 0.26;
-			w = 0.04 / (4/3); h = 0.04;
-		};
-
-		class moneyIcon : w_RscPicture {
-			idc = -1;
-			text = "client\icons\money.paa";
-			x = 0.022; y = 0.32;
-			w = 0.04 / (4/3); h = 0.04;
-		};
-
-		class waterText : w_RscText {
-			idc = water_text;
-			text = "";
-			sizeEx = 0.03;
-			x = 0.06; y = 0.193;
-			w = 0.3; h = 0.05;
-		};
-
-		class foodText : w_RscText {
-			idc = food_text;
-			sizeEx = 0.03;
-			text = "";
-			x = 0.06; y = 0.254;
-			w = 0.3; h = 0.05;
+			text = "mapConfig\logo.paa";
+			x = 0.35;
+			y = 0.16;
+			w = 0.2625;
+			h = 0.36;
 		};
 
 		class moneyText : w_RscText {
 			idc = money_text;
 			text = "";
 			sizeEx = 0.03;
-			x = 0.06; y = 0.313;
-			w = 0.3; h = 0.05;
+			x = 0.1375;
+			y = 0.14;
+			w = 0.1625;
+			h = 0.06;
 		};
 
-		/*class distanceText : w_RscText {
-			idc = view_range_text;
-			text = "View range:";
-			sizeEx = 0.025;
-			x = 0.03; y = 0.40;
-			w = 0.3; h = 0.02;
-		};*/
+		class bmoney: w_RscText {
+			idc = -1;
+			text = "Banco:";
+			sizeEx = 0.04;
+			x = 0.025;
+			y = 0.22;
+			w = 0.1;
+			h = 0.06;
+		};
 
-		class uptimeText : w_RscText {
-			idc = uptime_text;
+		class bmoneyText: RscText {
+			idc = bmoney_text;
 			text = "";
-			sizeEx = 0.030;
-			x = 0.52; y = 0.69;
-			w = 0.225; h = 0.03;
+			sizeEx = 0.03;
+			x = 0.1375;
+			y = 0.22;
+			w = 0.1625;
+			h = 0.06;
+		};
+
+		class cspText: w_RscText {
+			idc = -1;
+			text = "SERVER ANÔNIMOS ALTIS";
+			sizeEx = 0.04;
+			shadow = 2;
+			x = 0.6375;
+			y = 0.14;
+			w = 0.2875;
+			h = 0.06;
 		};
 	};
 
@@ -109,101 +111,166 @@ class playerSettings {
 
 		class itemList : w_Rsclist {
 			idc = item_list;
-			x = 0.49; y = 0.185;
-			w = 0.235; h = 0.325;
+			x = 0.025;
+			y = 0.32;
+			w = 0.275;
+			h = 0.42;
 		};
 
 		class DropButton : w_RscButton {
 			idc = -1;
-			text = "Drop";
+			text = "Dropar Item";
 			onButtonClick = "[1] execVM 'client\systems\playerMenu\itemfnc.sqf'";
-			x = 0.610; y = 0.525;
-			w = 0.116; h = 0.033 * safezoneH;
+			x = 0.175;
+			y = 0.76;
+			w = 0.125;
+			h = 0.06;
 		};
 
 		class UseButton : w_RscButton {
 			idc = -1;
-			text = "Use";
+			text = "Usar";
 			onButtonClick = "[0] execVM 'client\systems\playerMenu\itemfnc.sqf'";
-			x = 0.489; y = 0.525;
-			w = 0.116; h = 0.033 * safezoneH;
+			x = 0.025;
+			y = 0.76;
+			w = 0.125;
+			h = 0.06;
 		};
 
 		class moneyInput: w_RscCombo {
 			idc = money_value;
-			x = 0.610; y = 0.618;
-			w = .116; h = .030;
+			x = 0.35;
+			y = 0.86;
+			w = 0.1375;
+			h = 0.06;
 		};
 
 		class DropcButton : w_RscButton {
 			idc = -1;
-			text = "Drop";
+			text = "LARGAR DINHEIRO -->";
 			onButtonClick = "[] execVM 'client\systems\playerMenu\dropMoney.sqf'";
-			x = 0.489; y = 0.60;
-			w = 0.116; h = 0.033 * safezoneH;
+			x = 0.025;
+			y = 0.86;
+			w = 0.2825;
+			h = 0.06;
 		};
 
 		class CloseButton : w_RscButton {
 			idc = close_button;
-			text = "Close";
+			text = "Fechar";
 			onButtonClick = "[] execVM 'client\systems\playerMenu\closePlayerMenu.sqf'";
-			x = 0.02; y = 0.66;
-			w = 0.125; h = 0.033 * safezoneH;
+			x = 0.65;
+			y = 0.90;
+			w = 0.2625;
+			h = 0.033;
 		};
 
 		class GroupsButton : w_RscButton {
 			idc = groupButton;
-			text = "Group Management";
+			text = "Grupos";
 			onButtonClick = "[] execVM 'client\systems\groups\loadGroupManagement.sqf'";
-			x = 0.158; y = 0.66;
-			w = 0.225; h = 0.033 * safezoneH;
-		};
-
-		/*class btnDistanceNear : w_RscButton {
-			idc = -1;
-			text = "Near";
-			onButtonClick = "setViewDistance 1100;";
-			x = 0.02; y = 0.43;
-			w = 0.125; h = 0.033 * safezoneH;
-		};
-
-		class btnDistanceMedium : w_RscButton {
-			idc = -1;
-			text = "Medium";
-			onButtonClick = "setViewDistance 2200;";
-			x = 0.02; y = 0.5;
-			w = 0.125; h = 0.033 * safezoneH;
+			x = 0.35;
+			y = 0.74;
+			w = 0.2625;
+			h = 0.08;
 		};
 
 		class btnDistanceFar : w_RscButton {
 			idc = -1;
-			text = "Far";
-			onButtonClick = "setViewDistance 3300;";
-			x = 0.02; y = 0.57;
-			w = 0.125; h = 0.033 * safezoneH;
+			text = "Ver Distância";
+			onButtonClick = "call CHVD_fnc_openDialog";
+			x = 0.35;
+			y = 0.64;
+			w = 0.2625;
+			h = 0.08;
 		};
 
-		class btnDistanceInsane : w_RscButton {
-			text = "Insane";
-			onButtonClick = "setViewDistance 5000;";
-			x = 0.02; y = 0.60;
-			w = 0.125; h = 0.033 * safezoneH;
-		};*/
-
-		class btnDistanceCHVD : w_RscButton {
+		class TOParmaInfoButton : w_RscButton {
 			idc = -1;
-			text = "Viewdist.";
-			onButtonClick = "call CHVD_fnc_openDialog";
-			x = 0.02; y = 0.57;
-			w = 0.125; h = 0.033 * safezoneH;
+			text = "REGRAS";
+			onButtonClick = "createDialog'RscDisplayServerInfoMenu'";
+			x = 0.65;
+			y = 0.20;
+			w = 0.2625;
+			h = 0.06;
+		};
+
+		class btnDistanceCustom : w_RscButton {
+			idc = -1;
+			text = "INFO DO SERVER";
+			onButtonClick = "createDialog'RscDisplayServerInfoMenu2'";
+			x = 0.65;
+			y = 0.27;
+			w = 0.2625;
+			h = 0.06;
+		};
+
+		class btDistanceCustom : w_RscButton {
+			idc = -1;
+			text = "MODS";
+			onButtonClick = "createDialog'RscDisplayServerInfoMenu3'";
+			x = 0.65;
+			y = 0.34;
+			w = 0.2625;
+			h = 0.06;
+		};
+
+		class btEDistanceCustom : w_RscButton {
+			idc = -1;
+			text = "INFO MISSÕES";
+			onButtonClick = "createDialog'RscDisplayServerInfoMenu4'";
+			x = 0.65;
+			y = 0.41;
+			w = 0.2625;
+			h = 0.06;
+		};
+
+		class btODistanceCustom : w_RscButton {
+			idc = -1;
+			text = "INFO VIP";
+			onButtonClick = "createDialog'RscDisplayServerInfoMenu5'";
+			x = 0.65;
+			y = 0.48;
+			w = 0.2625;
+			h = 0.06;
+		};
+
+		class btaDistanceCustom : w_RscButton {
+			idc = -1;
+			text = "FAQ";
+			onButtonClick = "createDialog'RscDisplayServerInfoMenu6'";
+			x = 0.65;
+			y = 0.55;
+			w = 0.2625;
+			h = 0.06;
+		};
+
+		class btBDistanceCustom : w_RscButton {
+			idc = -1;
+			text = "SIST GUINCHO HELI";
+			onButtonClick = "createDialog'RscDisplayServerInfoMenu7'";
+			x = 0.65;
+			y = 0.62;
+			w = 0.2625;
+			h = 0.06;
+		};
+		
+		class airdrop: w_RscButton {
+			idc = -1;
+			text = "Suporte Aéreo";
+			action = "closeDialog 0;[] execVM 'addons\APOC_Airdrop_Assistance\APOC_cli_menu.sqf'";
+			x = 0.35;
+			y = 0.54;
+			w = 0.2625;
+			h = 0.08;
 		};
 
 		class btnKillfeed : w_RscButton {
 			idc = -1;
 			text = "Killfeed";
 			onButtonClick = "with missionNamespace do { [] call A3W_fnc_killFeedMenu }";
-			x = 0.158; y = 0.57;
-			w = 0.125; h = 0.033 * safezoneH;
+			x = 0.65; y = 0.84;
+			w = 0.2625; h = 0.033 * safezoneH;
 		};
 	};
 };
