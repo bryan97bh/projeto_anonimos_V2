@@ -23,11 +23,11 @@ class Header
 	minPlayers=1;
 	maxPlayers=146; // 144 players, 2 headless clients
 };
-author="AgentRev - A3Wasteland.com"; // it would be great if you could keep "A3Wasteland.com" in the name, like "YourName and A3Wasteland.com" :)
-onLoadName = "A3Wasteland Altis"; // it would be great if you could keep "A3" in the name, like "ABC A3Wasteland" instead of "ABC Wasteland" :)
-onLoadMission = "Wasteland is a harsh survival sandbox where two teams and independent players fight for survival.";
-overviewText = "Wasteland is a harsh survival sandbox where two teams and independent players fight for survival.";
-overviewTextLocked = "Wasteland is a harsh survival sandbox where two teams and independent players fight for survival.";
+author="AgentRev/editado por Guy Fawkes - A3Wasteland.com"; // it would be great if you could keep "A3Wasteland.com" in the name, like "YourName and A3Wasteland.com" :)
+onLoadName = "Anônimos Wasteland Altis"; // it would be great if you could keep "A3" in the name, like "ABC A3Wasteland" instead of "ABC Wasteland" :)
+onLoadMission = "ENTRE EM NOSSO DISCORD: https://invite.gg/anonimos";
+overviewText = "Discord: https://invite.gg/anonimos";
+overviewTextLocked = "Discord: https://invite.gg/anonimos";
 overviewPicture = "mapConfig\Loading.jpg";
 loadScreen = "mapConfig\Loading.jpg";
 briefing = 0; // if 0, skip Continue button
@@ -41,7 +41,7 @@ briefing = 0; // if 0, skip Continue button
 #define A3W_UICOLOR_B  0.96 // default = 0.96
 
 //Dialog includes
-
+#include "RJ\Configs.hpp"
 #include "client\gui_base.hpp"
 #include "addons\R3F_ARTY_AND_LOG\desc_include.h"
 #include "client\systems\ui_toolkit.hpp"
@@ -73,6 +73,20 @@ briefing = 0; // if 0, skip Continue button
 #include "addons\gui\gui.hpp"
 #include "addons\parking\list_simple_menu.hpp"
 #include "addons\CHVD\dialog.hpp"
+#include "scarCODE\ServerInfoMenu\hpp\CfgServerInfoMenu.hpp"
+#include "scarCODE\ServerInfoMenu\hpp\RscDisplayServerInfoMenu.hpp"
+#include "scarCODE\ServerInfoMenu2\hpp\CfgServerInfoMenu2.hpp"
+#include "scarCODE\ServerInfoMenu2\hpp\RscDisplayServerInfoMenu2.hpp"
+#include "scarCODE\ServerInfoMenu3\hpp\CfgServerInfoMenu3.hpp"
+#include "scarCODE\ServerInfoMenu3\hpp\RscDisplayServerInfoMenu3.hpp"
+#include "scarCODE\ServerInfoMenu4\hpp\CfgServerInfoMenu4.hpp"
+#include "scarCODE\ServerInfoMenu4\hpp\RscDisplayServerInfoMenu4.hpp"
+#include "scarCODE\ServerInfoMenu5\hpp\CfgServerInfoMenu5.hpp"
+#include "scarCODE\ServerInfoMenu5\hpp\RscDisplayServerInfoMenu5.hpp"
+#include "scarCODE\ServerInfoMenu6\hpp\CfgServerInfoMenu6.hpp"
+#include "scarCODE\ServerInfoMenu6\hpp\RscDisplayServerInfoMenu6.hpp"
+#include "scarCODE\ServerInfoMenu7\hpp\CfgServerInfoMenu7.hpp"
+#include "scarCODE\ServerInfoMenu7\hpp\RscDisplayServerInfoMenu7.hpp"
 
 class RscTitles
 {
@@ -83,6 +97,7 @@ class RscTitles
 	#include "client\systems\scoreboard\score_gui.hpp"
 	#include "client\systems\killFeed\killFeed_gui.hpp"
 	#include "addons\far_revive\revive_gui.hpp"
+	#include "addons\statusBar\statusBar.hpp"
 };
 
 class CfgDebriefing
@@ -97,6 +112,8 @@ class CfgDebriefing
 
 class CfgFunctions
 {
+	#include "RJ\RJ_Functions.hpp"
+
 	class A3W
 	{
 		#include "client\CfgFunctions.hpp"

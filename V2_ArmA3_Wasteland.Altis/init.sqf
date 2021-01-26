@@ -80,7 +80,7 @@ if (!isDedicated) then
 if (isServer) then
 {
 	diag_log format ["############################# %1 #############################", missionName];
-	diag_log "WASTELAND SERVER - Initializing Server";
+	diag_log "ANÔNIMOS BRASIL - Initializing Server";
 	[] execVM "server\init.sqf";
 };
 
@@ -96,6 +96,14 @@ if (hasInterface || isServer) then
 	[] execVM "addons\outlw_magrepack\MagRepack_init.sqf";
 	[] execVM "addons\lsd_nvg\init.sqf";
 	[] execVM "addons\stickyCharges\init.sqf";
+	[] execVM "addons\playerCustomUniforms\playerCustomUniforms.sqf";
+	[] execVM "scarCODE\ServerInfoMenu\sqf\initLocal.sqf"; // scarCODE ServerInfoMenu
+	[] execVM "scarCODE\ServerInfoMenu2\sqf\initLocal.sqf"; // scarCODE ServerInfoMenu
+	[] execVM "scarCODE\ServerInfoMenu3\sqf\initLocal.sqf"; // scarCODE ServerInfoMenu
+	[] execVM "scarCODE\ServerInfoMenu4\sqf\initLocal.sqf"; // scarCODE ServerInfoMenu
+	[] execVM "scarCODE\ServerInfoMenu5\sqf\initLocal.sqf"; // scarCODE ServerInfoMenu
+	[] execVM "scarCODE\ServerInfoMenu6\sqf\initLocal.sqf"; // scarCODE ServerInfoMenu
+	[] execVM "scarCODE\ServerInfoMenu7\sqf\initLocal.sqf"; // scarCODE ServerInfoMenu
 	if (isNil "drn_DynamicWeather_MainThread") then { drn_DynamicWeather_MainThread = [] execVM "addons\scripts\DynamicWeatherEffects.sqf" };
 };
 
@@ -106,3 +114,5 @@ if (hasInterface || isServer) then
 	"thisTrigger setTriggerTimeout [30,30,30,false]",
 	"{if (markerShape _x == 'POLYLINE') then {deleteMarker _x}} forEach allMapMarkers"
 ];
+
+player setVariable ["group_name", "0", true];
