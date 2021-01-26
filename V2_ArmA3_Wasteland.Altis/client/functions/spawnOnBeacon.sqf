@@ -7,6 +7,8 @@
 //	@file Created: 08/12/2012 18:30
 //	@file Args:
 
+call compile preprocessFileLineNumbers "client\functions\functions.sqf";
+
 private ["_data", "_beacon", "_pos", "_owner", "_preload", "_height", "_playerPos"];
 _data = _this select 0;
 _beacon = objectFromNetId (_data select 0);
@@ -36,6 +38,26 @@ player setPos _playerPos;
 
 respawnDialogActive = false;
 closeDialog 0;
+
+_target = player;
+_loadout=[_target] call Getloadout;
+0=[_target] call Frontpack;
+
+Private _ItemsBack = backpackItems player;
+
+removeBackpack _target;
+sleep 0.5;
+_target addBackpack "B_Parachute";
+while {(getPos _target select 2) > 2} do {
+    sleep 1;
+};
+deletevehicle (_target getvariable "frontpack");
+_target setvariable ["frontpack",nil,true];
+0=[_target,_loadout] call Setloadout;
+
+{
+	player addItemToBackpack _X;
+} ForEach _ItemsBack;
 
 _owner spawn
 {
