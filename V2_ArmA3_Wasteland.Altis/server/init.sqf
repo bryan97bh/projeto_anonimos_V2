@@ -552,3 +552,5 @@ if !(["A3W_hcObjCleanup"] call isConfigOn) then
 	// Start clean-up loop
 	execVM "server\WastelandServClean.sqf";
 };
+
+//[] execVM "addons\statusBar\fn_aj_s_refreshTime.sqf";
