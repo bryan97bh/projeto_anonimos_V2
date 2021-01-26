@@ -174,8 +174,6 @@ _playerSideNum = switch (playerSide) do
 		_showItem = false;
 	};
 
-	_showItem = !("HIDDEN" in (_x select [3,999]));
-
 	if (_showItem) then
 	{
 		_listIndex = _itemlist lbAdd format ["%1", if (!isNil "_parentCfg" && _x select 0 == "") then { getText (_parentCfg >> _weaponClass >> "displayName") } else { _x select 0 }];
