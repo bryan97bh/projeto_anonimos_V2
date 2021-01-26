@@ -12,12 +12,20 @@
 #define groupManagementAcceptButton 55518
 #define groupManagementDeclineButton 55519
 #define groupManagementInviteText 55520
+#define groupManagementNameButton 55521
+#define groupManagementNameInput_IDC 55522
 
 class GroupManagement {
 
 	idd = groupManagementDialog;
 	movingEnable = true;
 	enableSimulation = true;
+
+	#define Atm_TEXT_SIZE (0.04 * TEXT_SCALE)
+
+	class AtmLabelText : w_RscText {
+        sizeEx = Atm_TEXT_SIZE;
+    };
 
 	class controlsBackground {
 
@@ -157,6 +165,23 @@ class GroupManagement {
 			x = 0.375; y = 0.625 - 0.0255 * safezoneH;
 			w = 0.100; h = 0.033 * safezoneH;
 		};
+
+class NameInput : RscEdit
+        {
+            idc = groupManagementNameInput_IDC;
+            text = "";
+            sizeEx = Atm_TEXT_SIZE;
+            x = 0.17; y = 0.662;
+            w = 0.200; h = 0.033 * safezoneH;
+        };
+
+        class NameButton : w_RscButton {
+            idc = groupManagementNameButton;
+            text = "Mudar nome do grupo";
+            onButtonClick = "[] execVM 'client\systems\groups\NameGroup.sqf'";
+            x = 0.38; y = 0.662;
+            w = 0.225; h = 0.033 * safezoneH;
+        };
 	};
 };
 

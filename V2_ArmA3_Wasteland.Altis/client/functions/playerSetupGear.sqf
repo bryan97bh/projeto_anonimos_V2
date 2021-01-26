@@ -31,7 +31,7 @@ _player unlinkItem "ItemGPS";
 if (hmd _player != "") then { _player unlinkItem hmd _player };
 
 // Add NVG
-_player linkItem "NVGoggles";
+/*_player linkItem "NVGoggles";
 
 _player addBackpack "B_AssaultPack_rgr";
 
@@ -59,7 +59,9 @@ switch (true) do
 	{
 		_player addWeapon "Rangefinder";
 	};
-};
+};*/
+
+[] Call RJ_fnc_LoadoutInicial;
 
 if (_player == player) then
 {

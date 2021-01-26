@@ -139,13 +139,13 @@ class GroupManagement {
 			color[] = {0.95,0.1,0.1,1};
 		};
 
-		class NameInput : RscEdit
+class NameInput : RscEdit
         {
             idc = groupManagementNameInput_IDC;
             text = "";
             sizeEx = Atm_TEXT_SIZE;
             x = 0.17; y = 0.662;
-			w = 0.200; h = 0.033 * safezoneH;
+            w = 0.200; h = 0.033 * safezoneH;
         };
 
         class NameButton : w_RscButton {
