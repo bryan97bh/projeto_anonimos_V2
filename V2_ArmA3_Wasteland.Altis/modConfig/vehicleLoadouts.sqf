@@ -21,6 +21,7 @@ switch (true) do
 		switch (_variant) do
 		{
 			case "pawneeGun": { _pylons = ["",""] };
+			case "pawneeDelta": { _pylons = ["PylonRack_7Rnd_Rocket_04_HE_F","PylonRack_7Rnd_Rocket_04_AP_F","PylonRack_4Rnd_LG_scalpel","PylonRack_20Rnd_Rocket_03_HE_F"] };
 			default           { _pylons = ["PylonRack_12Rnd_missiles","PylonRack_12Rnd_missiles"] };
 		};
 	};
@@ -174,8 +175,10 @@ switch (true) do
 		switch (_variant) do
 		{
 			case "greyhawkBomber": { _pylons = ["PylonMissile_1Rnd_Bomb_04_F","PylonMissile_1Rnd_Bomb_04_F"] };
+			case "greyhawkBomber4": { _pylons = ["PylonRack_Bomb_GBU12_x2","PylonRack_Bomb_GBU12_x2"] };
+			case "greyhawkMissile6": { _pylons = ["PylonRack_3Rnd_LG_scalpel","PylonRack_3Rnd_LG_scalpel"] };
 			case "greyhawkCluster": { _pylons = ["PylonMissile_1Rnd_BombCluster_01_F","PylonMissile_1Rnd_BombCluster_01_F"] };
-			case "greyhawkDAGR":    { _pylons = ["PylonRack_12Rnd_PG_missiles","PylonWeapon_2000Rnd_65x39_belt"] };
+			case "greyhawkDAGR":    { _pylons = ["PylonRack_12Rnd_PG_missiles","PylonRack_12Rnd_PG_missiles"] };
 			default
 			{
 				_pylons = ["PylonRack_3Rnd_LG_scalpel","PylonRack_3Rnd_LG_scalpel"];
@@ -214,9 +217,20 @@ switch (true) do
 		];
 		switch (_variant) do
 		{
-			case "sentinelBomber": { _pylons = ["PylonRack_Bomb_GBU12_x2","PylonRack_Bomb_GBU12_x2"] };
+			case "sentinelMissile2": { _pylons = ["PylonRack_3Rnd_LG_scalpel","PylonRack_3Rnd_LG_scalpel"] };
+			case "sentinelBomber2": { _pylons = ["PylonMissile_Bomb_GBU12_x1","PylonMissile_Bomb_GBU12_x1"] };
+			case "sentinelBomber4": { _pylons = ["PylonRack_Bomb_GBU12_x2","PylonRack_Bomb_GBU12_x2"] };
+			case "sentinelBomber8": { _pylons = ["PylonRack_Bomb_SDB_x4","PylonRack_Bomb_SDB_x4"] };
 			case "sentinelCluster": { _pylons = ["PylonMissile_1Rnd_BombCluster_01_F","PylonMissile_1Rnd_BombCluster_01_F"] };
-			default                { _pylons = ["PylonMissile_Missile_AGM_02_x2","PylonMissile_Missile_AGM_02_x2"] };
+			default
+			{
+				_pylons = ["PylonRack_3Rnd_LG_scalpel","PylonRack_3Rnd_LG_scalpel"];
+				_customCode =
+				{
+					_veh setAmmoOnPylon [1, 2]; // right wing
+					_veh setAmmoOnPylon [2, 2]; // left wing
+				};
+			};
 		};
 	};
 
