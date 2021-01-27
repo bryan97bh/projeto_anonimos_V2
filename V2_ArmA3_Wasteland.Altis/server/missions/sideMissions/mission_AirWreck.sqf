@@ -13,8 +13,8 @@ private ["_nbUnits", "_wreckPos", "_wreck", "_box1", "_box2"];
 
 _setupVars =
 {
-	_missionType = "Aircraft Wreck";
-	_locationsArray = [ForestMissionMarkers, MissionSpawnMarkers] select (ForestMissionMarkers isEqualTo []);
+	_missionType = "HELICÓPTERO ABATIDO";
+	_locationsArray = ForestMissionMarkers;
 	_nbUnits = if (missionDifficultyHard) then { AI_GROUP_LARGE } else { AI_GROUP_MEDIUM };
 };
 
@@ -28,19 +28,21 @@ _setupObjects =
 
 	_box1 = createVehicle ["Box_NATO_WpsSpecial_F", _missionPos, [], 5, "None"];
 	_box1 setDir random 360;
-	[_box1, "mission_USSpecial"] call fn_refillbox;
+	[_box1, ["US", "OTHER"] call BIS_fnc_selectRandom] call fn_refillbox;
 
 	_box2 = createVehicle ["Box_East_WpsSpecial_F", _missionPos, [], 5, "None"];
 	_box2 setDir random 360;
-	[_box2, "mission_USLaunchers"] call fn_refillbox;
+	[_box2, ["RU", "MILITIA"] call BIS_fnc_selectRandom] call fn_refillbox;
 
 	{ _x setVariable ["R3F_LOG_disabled", true, true] } forEach [_box1, _box2];
 
 	_aiGroup = createGroup CIVILIAN;
 	[_aiGroup, _missionPos, _nbUnits] call createCustomGroup;
+	
+	_aiGroup setCombatMode "Red";
 
 	_missionPicture = getText (configFile >> "CfgVehicles" >> typeOf _wreck >> "picture");
-	_missionHintText = "A helicopter has come down under enemy fire!";
+	_missionHintText = "Um helicóptero foi avariado e sua tripulação está no local guarnecendo a aeronave!";
 };
 
 _waitUntilMarkerPos = nil;
@@ -59,7 +61,7 @@ _successExec =
 	{ _x setVariable ["R3F_LOG_disabled", false, true] } forEach [_box1, _box2];
 	deleteVehicle _wreck;
 
-	_successHintMessage = "The airwreck supplies have been collected, well done.";
+	_successHintMessage = "Os suprimentos que carregava a aeronave foram coletados com sucesso!";
 };
 
 _this call sideMissionProcessor;

@@ -15,10 +15,9 @@ _setupVars =
 {
 	_vehicleClass = // to specify a vehicleLoadouts variant, simply write "class/variant", e.g. "O_Heli_Light_02_dynamicLoadout_F/orcaDAR"
 	[
-		["B_APC_Wheeled_01_cannon_F", "B_APC_Tracked_01_rcws_F", "B_APC_Tracked_01_AA_F"],
+		["B_APC_Wheeled_01_cannon_F", "B_APC_Tracked_01_rcws_F", "B_APC_Tracked_01_AA_F", "B_AFV_Wheeled_01_cannon_F", "B_AFV_Wheeled_01_up_cannon_F"],
 		["O_APC_Wheeled_02_rcws_v2_F", "O_APC_Tracked_02_cannon_F", "O_APC_Tracked_02_AA_F"],
-		["I_APC_Wheeled_03_cannon_F", "I_APC_tracked_03_cannon_F"],
-		["B_AFV_Wheeled_01_cannon_F", "B_AFV_Wheeled_01_up_cannon_F"] // Tanks DLC
+		["I_APC_Wheeled_03_cannon_F", "I_APC_tracked_03_cannon_F"]
 	];
 
 	while {_vehicleClass isEqualType []} do { _vehicleClass = selectRandom _vehicleClass };
@@ -29,13 +28,13 @@ _setupVars =
 
 	_missionType = switch (true) do
 	{
-		case ({_vehicleClassTmp isKindOf _x} count ["B_APC_Tracked_01_AA_F", "O_APC_Tracked_02_AA_F"] > 0): { "Anti Aircraft Vehicle" };
-		case (_vehicleClassTmp isKindOf "Tank_F"):                                                          { "Infantry Fighting Vehicle" };
-		case (_vehicleClassTmp isKindOf "AFV_Wheeled_01_base_F"):                                           { "Armored Fighting Vehicle" };
-		default                                                                                             { "Armored Personnel Carrier" };
+		case ({_vehicleClassTmp isKindOf _x} count ["B_APC_Tracked_01_AA_F", "O_APC_Tracked_02_AA_F"] > 0): { "VEÍCULO ANTIAÉREO" };
+		case (_vehicleClassTmp isKindOf "Tank_F"):                                                          { "VEÍCULO DE COMBATE DE INFANTARIA" };
+		case (_vehicleClassTmp isKindOf "AFV_Wheeled_01_base_F"):                                           { "VEÍCULO BLINDADO DE COMBATE" };
+		default                                                                                             { "TRANSPORTADOR DE TROPA BLINDADO" };
 	};
 
-	_locationsArray = MissionSpawnMarkers;
+	_locationsArray = spawn_VMarkers;
 
 	_nbUnits = if (missionDifficultyHard) then { AI_GROUP_LARGE } else { AI_GROUP_MEDIUM };
 };

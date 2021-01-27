@@ -2,37 +2,69 @@
 // * This project is licensed under the GNU Affero GPL v3. Copyright © 2014 A3Wasteland.com *
 // ******************************************************************************************
 //	@file Version: 2.1
-//	@file Name: mission_Convoy.sqf
+//	@file Name: mission_MoneyShipment.sqf
 //	@file Author: JoSchaap / routes by Del1te - (original idea by Sanjo), AgentRev
 //	@file Created: 31/08/2013 18:19
 
 if (!isServer) exitwith {};
-#include "mainMissionDefines.sqf";
+#include "principalMissionsDefines.sqf";
 
-private ["_convoyVeh", "_veh1", "_veh2", "_veh3", "_createVehicle", "_vehicles", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_numWaypoints", "_box1", "_box2"];
+private ["_MoneyShipment", "_moneyAmount", "_convoys", "_vehChoices", "_moneyText", "_vehClasses", "_createVehicle", "_vehicles", "_veh2", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_numWaypoints", "_box1", "_box2"];
 
 _setupVars =
 {
-	_missionType = "Armed Convoy";
 	_locationsArray = LandConvoyPaths;
+
+	_MoneyShipment = selectRandom
+	[
+		// Extreme
+		[
+			"PATRULHA DE ALTIS", // Marker text
+			0, // Money
+			[
+				[ // NATO convoy
+				    ["B_MRAP_01_hmg_F"], // Veh 1
+					["B_MBT_01_arty_F"], // Veh 2
+					["B_APC_Wheeled_01_cannon_F"], // Veh 3
+					["B_MBT_01_TUSK_F"], // Veh 4
+					["B_APC_Tracked_01_AA_F"], // Veh 5
+					["B_MBT_01_cannon_F"] // Veh 6
+				],
+				[ // CSAT convoy
+					["I_MRAP_03_hmg_F"], // Veh 1
+					["B_MBT_01_mlrs_F"], // Veh 2
+					["O_APC_Tracked_02_cannon_F"], // Veh 3
+					["O_MBT_02_cannon_F"], // Veh 4
+					["O_APC_Tracked_02_AA_F"], // Veh 5
+					["O_APC_Wheeled_02_rcws_v2_F"] // Veh 6
+				],
+				[ // AAF convoy
+				    ["I_MRAP_03_hmg_F"], // Veh 1
+					["I_Truck_02_MRL_F"], // Veh 2
+					["I_MBT_03_cannon_F"], // Veh 3
+					["I_LT_01_scout_F"], // Veh 4
+					["I_LT_01_AA_F"], // Veh 5
+					["I_APC_Wheeled_03_cannon_F"] // Veh 6
+				]
+			]
+		]
+	];
+
+	_missionType = _MoneyShipment select 0;
+	_moneyAmount = _MoneyShipment select 1;
+	_convoys = _MoneyShipment select 2;
+	_vehChoices = selectRandom _convoys;
+
+	_moneyText = format ["$%1", [_moneyAmount] call fn_numbersText];
+
+	_vehClasses = [];
+	{ _vehClasses pushBack selectRandom _x } forEach _vehChoices;
 };
 
 _setupObjects =
 {
 	private ["_starts", "_startDirs", "_waypoints"];
 	call compile preprocessFileLineNumbers format ["mapConfig\convoys\%1.sqf", _missionLocation];
-
-	// pick the vehicles for the convoy
-	_convoyVeh =
-	[
-		["B_MRAP_01_hmg_F", "B_Truck_01_covered_F", "B_MRAP_01_hmg_F"],
-		["O_MRAP_02_hmg_F", "O_Truck_03_covered_F", "O_MRAP_02_hmg_F"],
-		["I_MRAP_03_hmg_F", "I_Truck_02_covered_F", "I_MRAP_03_hmg_F"]
-	] call BIS_fnc_selectRandom;
-
-	_veh1 = _convoyVeh select 0;
-	_veh2 = _convoyVeh select 1;
-	_veh3 = _convoyVeh select 2;
 
 	_createVehicle =
 	{
@@ -44,7 +76,6 @@ _setupObjects =
 
 		_vehicle = createVehicle [_type, _position, [], 0, "None"];
 		_vehicle setVariable ["R3F_LOG_disabled", true, true];
-		//_vehicle setVariable ["A3W_skipAutoSave", true, true];
 		[_vehicle] call vehicleSetup;
 
 		// apply tropical textures to vehicles on Tanoa
@@ -63,13 +94,17 @@ _setupObjects =
 		_soldier = [_aiGroup, _position] call createRandomSoldier;
 		_soldier moveInDriver _vehicle;
 
-		_soldier = [_aiGroup, _position] call createRandomSoldier;
-		_soldier moveInCargo [_vehicle, 0];
+		if !(_type isKindOf "LT_01_base_F") then
+		{
+			_soldier = [_aiGroup, _position] call createRandomSoldier;
+			_soldier moveInCargo [_vehicle, 0];
+		};
 
 		if !(_type isKindOf "Truck_F") then
 		{
 			_soldier = [_aiGroup, _position] call createRandomSoldier;
 			_soldier moveInGunner _vehicle;
+			if (_type isKindOf "LT_01_base_F") exitWith {};
 
 			_soldier = [_aiGroup, _position] call createRandomSoldier;
 
@@ -90,12 +125,12 @@ _setupObjects =
 
 	_aiGroup = createGroup CIVILIAN;
 
-	_vehicles =
-	[
-		[_veh1, _starts select 0, _startDirs select 0] call _createVehicle,
-		[_veh2, _starts select 1, _startDirs select 1] call _createVehicle,
-		[_veh3, _starts select 2, _startDirs select 2] call _createVehicle
-	];
+	_vehicles = [];
+	{
+		_vehicles pushBack ([_x, _starts select (_forEachIndex max 0 min (count _starts - 1)), _startdirs select (_forEachIndex max 0 min (count _startdirs - 1)), _aiGroup] call _createVehicle);
+	} forEach _vehClasses;
+
+	_veh2 = _vehClasses select (1 min (count _vehClasses - 1));
 
 	_leader = effectiveCommander (_vehicles select 0);
 	_aiGroup selectLeader _leader;
@@ -121,9 +156,9 @@ _setupObjects =
 	_missionPos = getPosATL leader _aiGroup;
 
 	_missionPicture = getText (configFile >> "CfgVehicles" >> _veh2 >> "picture");
-	_vehicleName = getText (configFile >> "CfgVehicles" >> _veh2 >> "displayName");
+	_vehicleName = getText (configFile >> "cfgVehicles" >> _veh2 >> "displayName");
 
-	_missionHintText = format ["A <t color='%2'>%1</t> transporting 2 weapon crates is being escorted by armed vehicles. Stop them!", _vehicleName, mainMissionColor];
+	_missionHintText = format ["Uma é suspeito de estar carregando caixas de armas e está sendo escoltado por veiculos armados. Verifique essa informação", moneyMissionColor, _moneyText, _vehicleName];
 
 	_numWaypoints = count waypoints _aiGroup;
 };
@@ -140,15 +175,17 @@ _successExec =
 {
 	// Mission completed
 
-	_box1 = createVehicle ["Box_NATO_Wps_F", _lastPos, [], 2, "None"];
+	_box1 = createVehicle ["B_supplyCrate_F", _lastPos, [], 2, "None"];
 	_box1 setDir random 360;
-	[_box1, "mission_USSpecial"] call fn_refillbox;
+	[_box1, ["US", "OTHER"] call BIS_fnc_selectRandom] call fn_refillbox;
 
-	_box2 = createVehicle ["Box_East_WpsSpecial_F", _lastPos, [], 2, "None"];
+	_box2 = createVehicle ["B_supplyCrate_F", _lastPos, [], 2, "None"];
 	_box2 setDir random 360;
-	[_box2, "mission_USLaunchers"] call fn_refillbox;
+	[_box2, ["RU", "MILITIA"] call BIS_fnc_selectRandom] call fn_refillbox;
 
-	_successHintMessage = "The convoy has been stopped, the weapon crates and vehicles are now yours to take.";
+	{ _x setVariable ["R3F_LOG_disabled", false, true] } forEach [_box1, _box2];
+
+	_successHintMessage = "O comboio foi parado";
 };
 
-_this call mainMissionProcessor;
+_this call principalMissionProcessor;

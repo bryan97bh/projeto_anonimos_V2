@@ -5,13 +5,13 @@
 //	@file Author: JoSchaap, AgentRev
 
 if (!isServer) exitwith {};
-#include "sideMissionDefines.sqf"
+#include "hostileairMissionDefines.sqf"
 
 private ["_vehicleClass", "_vehicle", "_createVehicle", "_vehicles", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_numWaypoints", "_box1", "_box2"];
 
 _setupVars =
 {
-	_missionType = "Hostile Helicopter";
+	_missionType = "HELICÓPTERO HOSTIL";
 	_locationsArray = nil; // locations are generated on the fly from towns
 };
 
@@ -19,14 +19,7 @@ _setupObjects =
 {
 	_missionPos = markerPos (((call cityList) call BIS_fnc_selectRandom) select 0);
 
-	_vehicleClass = if (missionDifficultyHard) then
-	{
-		selectRandom ["B_Heli_Attack_01_dynamicLoadout_F", "O_Heli_Attack_02_dynamicLoadout_F"] ;
-	}
-	else
-	{
-		selectRandom [["B_Heli_Light_01_dynamicLoadout_F", "pawneeNormal"], ["O_Heli_Light_02_dynamicLoadout_F", "orcaDAGR"], "I_Heli_light_03_dynamicLoadout_F"];
-	};
+	_vehicleClass = [["B_Heli_Light_01_dynamicLoadout_F", "pawneeNormal"], ["O_Heli_Light_02_dynamicLoadout_F", "orcaDAR"], "I_Heli_light_03_dynamicLoadout_F", "B_Heli_Attack_01_dynamicLoadout_F", "O_Heli_Attack_02_dynamicLoadout_F"] call BIS_fnc_selectRandom;
 
 	_createVehicle =
 	{
@@ -57,7 +50,7 @@ _setupObjects =
 
 		// add a driver/pilot/captain to the vehicle
 		// the little bird, orca, and hellcat do not require gunners and should not have any passengers
-		_soldier = [_aiGroup, _position] call createRandomSoldierC;
+		_soldier = [_aiGroup, _position] call createRandomPilot;
 		_soldier moveInDriver _vehicle;
 
 		switch (true) do
@@ -65,17 +58,17 @@ _setupObjects =
 			case (_type isKindOf "Heli_Transport_01_base_F"):
 			{
 				// these choppers have 2 turrets so we need 2 gunners
-				_soldier = [_aiGroup, _position] call createRandomSoldierC;
+				_soldier = [_aiGroup, _position] call createRandomPilot;
 				_soldier moveInTurret [_vehicle, [1]];
 
-				_soldier = [_aiGroup, _position] call createRandomSoldierC;
+				_soldier = [_aiGroup, _position] call createRandomPilot;
 				_soldier moveInTurret [_vehicle, [2]];
 			};
 
 			case (_type isKindOf "Heli_Attack_01_base_F" || _type isKindOf "Heli_Attack_02_base_F"):
 			{
 				// these choppers need 1 gunner
-				_soldier = [_aiGroup, _position] call createRandomSoldierC;
+				_soldier = [_aiGroup, _position] call createRandomPilot;
 				_soldier moveInGunner _vehicle;
 			};
 		};
@@ -126,7 +119,7 @@ _setupObjects =
 	_missionPicture = getText (configFile >> "CfgVehicles" >> (_vehicleClass param [0,""]) >> "picture");
 	_vehicleName = getText (configFile >> "CfgVehicles" >> (_vehicleClass param [0,""]) >> "displayName");
 
-	_missionHintText = format ["An armed <t color='%2'>%1</t> is patrolling the island. Intercept it and recover its cargo!", _vehicleName, sideMissionColor];
+	_missionHintText = format ["Um <t color='%2'>%1</t> armado está patrulhando a ilha. Intercepte-o e recupere sua carga!", _vehicleName, sideMissionColor];
 
 	_numWaypoints = count waypoints _aiGroup;
 };
@@ -157,14 +150,16 @@ _successExec =
 
 		_box1 = createVehicle ["Box_NATO_Wps_F", (getPosATL _veh) vectorAdd ([[_veh call fn_vehSafeDistance, 0, 0], random 360] call BIS_fnc_rotateVector2D), [], 5, "None"];
 		_box1 setDir random 360;
-		[_box1, "mission_USSpecial"] call fn_refillbox;
+		[_box1, ["US", "OTHER"] call BIS_fnc_selectRandom] call fn_refillbox;
 
 		_box2 = createVehicle ["Box_East_Wps_F", (getPosATL _veh) vectorAdd ([[_veh call fn_vehSafeDistance, 0, 0], random 360] call BIS_fnc_rotateVector2D), [], 5, "None"];
 		_box2 setDir random 360;
-		[_box2, "mission_USLaunchers"] call fn_refillbox;
+		[_box2, ["RU", "OTHER"] call BIS_fnc_selectRandom] call fn_refillbox;
+		
+		{ _x setVariable ["R3F_LOG_disabled", false, true] } forEach [_box1, _box2];
 	};
 
-	_successHintMessage = "The sky is clear again, the enemy patrol was taken out! Ammo crates have fallen near the wreck.";
+	_successHintMessage = "O céu está limpo novamente, a patrulha inimiga foi retirada! Caixas de munição caíram perto dos destroços.";
 };
 
-_this call sideMissionProcessor;
+_this call hostileairMissionsProcessor;

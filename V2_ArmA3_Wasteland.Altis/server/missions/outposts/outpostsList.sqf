@@ -6,5 +6,10 @@
 
 [
 	"Outpost1",
-	"Outpost2"
+	"Outpost2",
+	"commandPost1",
+	"outpostSoulRampart",
+	"outpostSoulRapid",
+	"outpostSoulRecon",
+	"outpostSoulResistance"
 ]

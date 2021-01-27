@@ -1,20 +1,16 @@
-// ******************************************************************************************
-// * This project is licensed under the GNU Affero GPL v3. Copyright © 2014 A3Wasteland.com *
-// ******************************************************************************************
-//	@file Name: mission_TownInvasion.sqf
-//	@file Author: [404] Deadbeat, [404] Costlyy, JoSchaap, AgentRev, Zenophon
-//  @file Information: JoSchaap's Lite version of 'Infantry Occupy House' Original was made by: Zenophon
+//	@file Author: Bryan /  matar e destruir vencer pelo brasil 
+//	@file Created: 19/07/2020
 
 if (!isServer) exitwith {};
 
-#include "sideMissionDefines.sqf"
+#include "principalMissionsDefines.sqf"
 
 private ["_nbUnits", "_box1", "_box2", "_townName", "_missionPos", "_buildingRadius", "_putOnRoof", "_fillEvenly", "_tent1", "_chair1", "_chair2", "_cFire1"];
 
 _setupVars =
 {
-	_missionType = "Town Invasion";
-	_nbUnits = if (missionDifficultyHard) then { AI_GROUP_LARGE } else { AI_GROUP_MEDIUM };
+	_missionType = "OCUPAÇÃO";
+	_nbUnits = if (missionDifficultyHard) then { AI_GROUP_LARGE };
 
 	// settings for this mission
 	_locArray = ((call cityList) call BIS_fnc_selectRandom);
@@ -35,13 +31,13 @@ _setupVars =
 _setupObjects =
 {
 	// spawn some crates in the middle of town (Town marker position)
-	_box1 = createVehicle ["Box_NATO_Wps_F", _missionPos, [], 5, "None"];
+	_box1 = createVehicle ["Box_East_Wps_F", _missionPos, [], 5, "None"];
 	_box1 setDir random 360;
-	[_box1, "mission_USSpecial"] call fn_refillbox;
+	[_box1, ["RU", "MILITIA"] call BIS_fnc_selectRandom] call fn_refillbox;
 
 	_box2 = createVehicle ["Box_East_Wps_F", _missionPos, [], 5, "None"];
 	_box2 setDir random 360;
-	[_box2, "mission_USLaunchers"] call fn_refillbox;
+	[_box2, ["RU", "MILITIA"] call BIS_fnc_selectRandom] call fn_refillbox;
 
 	// create some atmosphere around the crates 8)
 	_tent1 = createVehicle ["Land_cargo_addon02_V2_F", _missionPos, [], 3, "None"];
@@ -57,12 +53,13 @@ _setupObjects =
 
 	// spawn some rebels/enemies :)
 	_aiGroup = createGroup CIVILIAN;
-	[_aiGroup, _missionPos, _nbUnits] call createCustomGroup2;
+	[_aiGroup, _missionPos, _nbUnits] call createocupacaoGroup;
 
 	// move them into buildings
 	[_aiGroup, _missionPos, _buildingRadius, _fillEvenly, _putOnRoof] call moveIntoBuildings;
-
-	_missionHintText = format ["Hostiles have taken over <br/><t size='1.25' color='%1'>%2</t><br/><br/>There seem to be <t color='%1'>%3 enemies</t> hiding inside or on top of buildings. Get rid of them all, and take their supplies!<br/>Watch out for those windows!", sideMissionColor, _townName, _nbUnits];
+	
+	_aiGroup setCombatMode "Red";
+	_missionHintText = format ["Os hostis assumiram o controle <br/><t size='1.25' color='%1'>%2</t><br/><br/>Parece haver <t color='%1'>%3 inimigos</t> escondidos dentro ou em cima de edifícios. Livre-se de todos e leve os suprimentos!", sideMissionColor, _townName, _nbUnits];
 };
 
 _waitUntilMarkerPos = nil;
@@ -80,8 +77,8 @@ _successExec =
 	// Mission completed
 	{ _x setVariable ["R3F_LOG_disabled", false, true] } forEach [_box1, _box2];
 
-	_successHintMessage = format ["Nice work!<br/><br/><t color='%1'>%2</t><br/>is a safe place again!<br/>Their belongings are now yours to take!", sideMissionColor, _townName];
+	_successHintMessage = format ["Bom trabalho!<br/><br/><t color='%1'>%2</t><br/> é um lugar seguro novamente! <br/> os pertences agora são seus!", sideMissionColor, _townName];
 	{ deleteVehicle _x } forEach [_tent1, _chair1, _chair2, _cFire1];
 };
 
-_this call sideMissionProcessor;
+_this call principalMissionProcessor;

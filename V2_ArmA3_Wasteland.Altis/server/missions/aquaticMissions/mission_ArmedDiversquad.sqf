@@ -6,27 +6,25 @@
 //	@file Author: JoSchaap, AgentRev
 
 if (!isServer) exitwith {};
-#include "mainMissionDefines.sqf";
+#include "aquaticMissionDefines.sqf";
 
-private ["_box1", "_box2", "_boxPos", "_vehicleClass", "_vehicle"];
+private ["_box1", "_box2", "_boxPos", "_vehicleClass", "_vehicle", "_randomBox", "_randomBox2"];
 
 _setupVars =
 {
-	_missionType = "Armed Diving Expedition";
+	_missionType = "EXPEDIÇÃO GRUMEC";
 	_locationsArray = SunkenMissionMarkers;
 };
 
 _setupObjects =
 {
 	_missionPos = markerPos _missionLocation;
+	
+	_box1 = createVehicle ["Box_East_Wps_F", _missionPos, [], 5, "None"];
+	[_box1, ["RU", "MILITIA"] call BIS_fnc_selectRandom] call fn_refillbox;
 
-	_box1 = createVehicle ["Box_IND_WpsSpecial_F", _missionPos, [], 5, "None"];
-	_box1 setDir random 360;
-	[_box1, "mission_Main_A3snipers"] call fn_refillbox;
-
-	_box2 = createVehicle ["Box_NATO_WpsSpecial_F", _missionPos, [], 5, "None"];
-	_box2 setDir random 360;
-	[_box2, "mission_USSpecial2"] call fn_refillbox;
+	_box2 = createVehicle ["Box_East_Wps_F", _missionPos, [], 5, "None"];
+	[_box2, ["RU", "MILITIA"] call BIS_fnc_selectRandom] call fn_refillbox;
 
 	{
 		_boxPos = getPosASL _x;
@@ -53,12 +51,12 @@ _setupObjects =
 	]] call processItems;
 
 	_aiGroup = createGroup CIVILIAN;
-	[_aiGroup, _missionPos] call createLargeDivers;
+	[_aiGroup, _missionPos] call createsmallDivers;
 
 	[_vehicle, _aiGroup] spawn checkMissionVehicleLock;
 
 	_missionPicture = getText (configFile >> "CfgVehicles" >> _vehicleClass >> "picture");
-	_missionHintText = "An armed expedition is trying to recover sunken ammo crates.<br/>If you want to capture them, you will need diving gear and an underwater weapon.";
+	_missionHintText = "Uma expedição do Grupo de Mergulhadores de Combate, está tentando recuperar caixas de munições afundadas.<br/>Você precisará de equipamento de mergulho e arma de propósito duplo (SDAR) para completar a missão.";
 };
 
 _waitUntilMarkerPos = nil;
@@ -79,7 +77,7 @@ _successExec =
 	{ _x setVariable ["R3F_LOG_disabled", false, true] } forEach [_box1, _box2];
 	_vehicle lockDriver false;
 
-	_successHintMessage = "The sunken crates have been captured, well done.";
+	_successHintMessage = "As caixas foram capturadas, missão completa!";
 };
 
-_this call mainMissionProcessor;
+_this call aquaticMissionsProcessor;

@@ -19,7 +19,7 @@ _aiGroup = grpNull;
 
 if (!isNil "_setupVars") then { call _setupVars };
 
-diag_log format ["WASTELAND SERVER - %1 Mission%2 started: %3", MISSION_PROC_TYPE_NAME, _controllerSuffix, _missionType];
+diag_log format ["Servidor Anônimos Brasil - %1 Missão%2 começou: %3", MISSION_PROC_TYPE_NAME, _controllerSuffix, _missionType];
 
 _missionTimeout = MISSION_PROC_TIMEOUT;
 
@@ -47,7 +47,7 @@ _aiGroup setVariable ["A3W_missionMarkerName", _marker, true];
 if (isNil "_missionPicture") then { _missionPicture = "" };
 
 [
-	format ["%1 Objective", MISSION_PROC_TYPE_NAME],
+	format ["%1 ", MISSION_PROC_TYPE_NAME],
 	_missionType,
 	_missionPicture,
 	_missionHintText,
@@ -55,7 +55,7 @@ if (isNil "_missionPicture") then { _missionPicture = "" };
 ]
 call missionHint;
 
-diag_log format ["WASTELAND SERVER - %1 Mission%2 waiting to be finished: %3", MISSION_PROC_TYPE_NAME, _controllerSuffix, _missionType];
+diag_log format ["Servidor Anônimos Brasil - %1 Missão%2 esperando para ser finalizada: %3", MISSION_PROC_TYPE_NAME, _controllerSuffix, _missionType];
 
 _failed = false;
 _complete = false;
@@ -133,15 +133,15 @@ if (_failed) then
 	};
 
 	[
-		"Objective Failed",
+		"Objetivo Falhou",
 		_missionType,
 		_missionPicture,
-		if (!isNil "_failedHintMessage") then { _failedHintMessage } else { "Better luck next time!" },
+		if (!isNil "_failedHintMessage") then { _failedHintMessage } else { "Mais sorte da próxima vez!" },
 		failMissionColor
 	]
 	call missionHint;
 
-	diag_log format ["WASTELAND SERVER - %1 Mission%2 failed: %3", MISSION_PROC_TYPE_NAME, _controllerSuffix, _missionType];
+	diag_log format ["Servidor Anônimos Brasil - %1 Missão%2 falhou: %3", MISSION_PROC_TYPE_NAME, _controllerSuffix, _missionType];
 }
 else
 {
@@ -164,7 +164,7 @@ else
 	{
 		_vehicle setVariable ["R3F_LOG_disabled", false, true];
 		_vehicle setVariable ["A3W_missionVehicle", true, true];
-		_vehicle setVariable ["A3W_lockpickDisabled", nil, true];
+		_vehicle setVariable ["A3W_lockpickDisabled", false, true];
 
 		if (!isNil "fn_manualVehicleSave" && !(_vehicle getVariable ["A3W_skipAutoSave", false])) then
 		{
@@ -186,7 +186,7 @@ else
 
 				_x setVariable ["R3F_LOG_disabled", false, true];
 				_x setVariable ["A3W_missionVehicle", true, true];
-				_x setVariable ["A3W_lockpickDisabled", nil, true];
+				_x setVariable ["A3W_lockpickDisabled", false, true];
 
 				if (!isNil "fn_manualVehicleSave" && !(_x getVariable ["A3W_skipAutoSave", false])) then
 				{
@@ -197,7 +197,7 @@ else
 	};
 
 	[
-		"Objective Complete",
+		"Objetivo Finalizado",
 		_missionType,
 		_missionPicture,
 		_successHintMessage,
@@ -205,7 +205,7 @@ else
 	]
 	call missionHint;
 
-	diag_log format ["WASTELAND SERVER - %1 Mission%2 complete: %3", MISSION_PROC_TYPE_NAME, _controllerSuffix, _missionType];
+	diag_log format ["Servidor Anônimos Brasil - %1 Missão%2 finalizada: %3", MISSION_PROC_TYPE_NAME, _controllerSuffix, _missionType];
 };
 
 deleteGroup _aiGroup;

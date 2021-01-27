@@ -1,11 +1,3 @@
-// ******************************************************************************************
-// * This project is licensed under the GNU Affero GPL v3. Copyright © 2014 A3Wasteland.com *
-// ******************************************************************************************
-//	@file Version: 1.0
-//	@file Name: mission_VehicleCapture.sqf
-//	@file Author: [404] Deadbeat, [404] Costlyy, JoSchaap, AgentRev
-//	@file Created: 08/12/2012 15:19
-
 if (!isServer) exitwith {};
 #include "mainMissionDefines.sqf";
 
@@ -31,7 +23,7 @@ _setupObjects =
 	/*switch (true) do
 	{
 		// GMG MRAPs
-		/*case ({ _vehicle isKindOf _x } count ["MRAP_01_gmg_base_F","MRAP_02_gmg_base_F","MRAP_03_gmg_base_F"] > 0):
+		case ({ _vehicle isKindOf _x } count ["MRAP_01_gmg_base_F","MRAP_02_gmg_base_F","MRAP_03_gmg_base_F"] > 0):
 		{
 			_vehicle setVehicleAmmoDef 1;
 
@@ -156,7 +148,7 @@ _setupObjects =
 			// Cut all ammo by half
 			_vehicle setVehicleAmmoDef 0.5;
 		};
-	};
+	};*/
 
 	// Reset all flares to 120
 	if (_vehicleClass isKindOf "Air") then
@@ -171,17 +163,19 @@ _setupObjects =
 		_vehicle addMagazineTurret ["120Rnd_CMFlare_Chaff_Magazine", [-1]];
 	};
 
-	reload _vehicle;*/
+	reload _vehicle;
 
 	_aiGroup = createGroup CIVILIAN;
-	[_aiGroup, _missionPos, _nbUnits] call createCustomGroup;
+	[_aiGroup, _missionPos, _nbUnits] call createcustomGroup;
+	
+    _aiGroup setCombatMode "Red";
 
 	_missionPicture = getText (configFile >> "CfgVehicles" >> _vehicleClass >> "picture");
 	_vehicleName = getText (configFile >> "CfgVehicles" >> _vehicleClass >> "displayName");
 
 	_vehDeterminer = if ("AEIMO" find (_vehicleName select [0,1]) != -1) then { "An" } else { "A" };
 
-	_missionHintText = format ["%1 <t color='%3'>%2</t> has been immobilized, go get it for your team!", _vehDeterminer, _vehicleName, mainMissionColor];
+	_missionHintText = format ["%1 <t color='%3'>%2</t> foi imobilizado, vá buscá-lo para sua equipe!", _vehDeterminer, _vehicleName, mainMissionColor];
 };
 
 _waitUntilMarkerPos = nil;
@@ -199,7 +193,7 @@ _successExec =
 	// Mission completed
 	[_vehicle, 1] call A3W_fnc_setLockState; // Unlock
 
-	_successHintMessage = format ["The %1 has been captured, well done.", _vehicleName];
+	_successHintMessage = format ["O %1 foi capturado, muito bem.", _vehicleName];
 };
 
 _this call mainMissionProcessor;

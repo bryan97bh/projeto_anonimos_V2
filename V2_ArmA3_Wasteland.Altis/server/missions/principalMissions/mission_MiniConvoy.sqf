@@ -7,13 +7,13 @@
 //	@file Created: 31/08/2013 18:19
 
 if (!isServer) exitwith {};
-#include "sideMissionDefines.sqf";
+#include "principalMissionsDefines.sqf";
 
 private ["_convoyVeh", "_veh1", "_veh2", "_veh3", "_createVehicle", "_vehicles", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_numWaypoints", "_box1", "_box2"];
 
 _setupVars =
 {
-	_missionType = "Truck Convoy";
+	_missionType = "ESCOLTA ARMADA";
 	_locationsArray = LandConvoyPaths;
 };
 
@@ -114,7 +114,7 @@ _setupObjects =
 	_missionPicture = getText (configFile >> "CfgVehicles" >> _veh2 >> "picture");
 	_vehicleName = getText (configFile >> "CfgVehicles" >> _veh2 >> "displayName");
 
-	_missionHintText = format ["A <t color='%2'>%1</t> transporting 2 weapon crates is being escorted. Stop the convoy!", _vehicleName, sideMissionColor];
+	_missionHintText = format ["Uma <t color='%2'>%1</t> escolta armada está carregando caixas de armas! Pegue elas!", _vehicleName, sideMissionColor];
 
 	_numWaypoints = count waypoints _aiGroup;
 };
@@ -132,13 +132,15 @@ _successExec =
 	// Mission completed
 	_box1 = createVehicle ["Box_NATO_Wps_F", _lastPos, [], 2, "None"];
 	_box1 setDir random 360;
-	[_box1, "mission_USSpecial2"] call fn_refillbox;
+	[_box1, ["US", "OTHER"] call BIS_fnc_selectRandom] call fn_refillbox;
 
 	_box2 = createVehicle ["Box_East_WpsSpecial_F", _lastPos, [], 2, "None"];
 	_box2 setDir random 360;
-	[_box2, "mission_USLaunchers"] call fn_refillbox;
+	[_box2, ["RU", "MILITIA"] call BIS_fnc_selectRandom] call fn_refillbox;
 
-	_successHintMessage = "The convoy has been stopped, the weapon crates and vehicles are now yours to take.";
+	{ _x setVariable ["R3F_LOG_disabled", false, true] } forEach [_box1, _box2];
+	
+	_successHintMessage = "A escolta foi parada! Muito bom";
 };
 
-_this call sideMissionProcessor;
+_this call principalMissionProcessor;
