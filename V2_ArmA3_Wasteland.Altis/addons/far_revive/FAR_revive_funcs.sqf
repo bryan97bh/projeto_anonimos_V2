@@ -5,7 +5,7 @@
 #include "gui_defines.hpp"
 
 #define FAR_Max_Distance 2.5
-#define FAR_Revive_Duration 10 //seconds
+#define FAR_Revive_Duration 60 //seconds
 
 ////////////////////////////////////////////////
 // Player Actions
