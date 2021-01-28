@@ -97,6 +97,18 @@
 		<Key ID="STR_WL_ShopDescriptions_Warchest">
 			<English>A safe to store your team's money.</English>
 		</Key>
+		<Key ID="STR_WL_ShopDescriptions_LSD">
+			<English>Droga alucinógena poderosa.</English>
+		</Key>
+		<Key ID="STR_WL_ShopDescriptions_Marijuana">
+			<English>A Erva da paz.</English>
+		</Key>
+		<Key ID="STR_WL_ShopDescriptions_Cocaine">
+			<English>Droga estimulante.</English>
+		</Key>
+		<Key ID="STR_WL_ShopDescriptions_Heroin">
+			<English>Droga analgésica altamente viciante.</English>
+		</Key>
 	</Package>
 	<Package name="Dialogs">
 		<Key ID="STR_WL_dialog_TeamkillText">
