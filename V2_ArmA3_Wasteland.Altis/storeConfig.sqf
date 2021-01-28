@@ -1256,7 +1256,6 @@ backpackArray = compileFinal str
 
 genItemArray = compileFinal str
 [
-
 	/*["AR-2 Darter UAV", "B_UAV_01_backpack_F", 2500, "backpack", "HIDDEN"],
 	["AR-2 Darter UAV", "O_UAV_01_backpack_F", 2500, "backpack", "HIDDEN"],
 	["AR-2 Darter UAV", "I_UAV_01_backpack_F", 2500, "backpack", "HIDDEN"],
@@ -2031,17 +2030,32 @@ colorsArray = compileFinal str
 // ["Medical Kit", "medkits", localize "STR_WL_ShopDescriptions_MedKit", "client\icons\medkit.paa", 400, 200],  // not needed since there are First Ait Kits
 customPlayerItems = compileFinal str
 [
-	["Artillery Strike", "artillery", "", "client\icons\tablet.paa", 500000, 100000, "HIDDEN"],
-	["Water Bottle", "water", localize "STR_WL_ShopDescriptions_Water", "client\icons\waterbottle.paa", 30, 15],
-	["Canned Food", "cannedfood", localize "STR_WL_ShopDescriptions_CanFood", "client\icons\cannedfood.paa", 30, 15],
-	["Repair Kit", "repairkit", localize "STR_WL_ShopDescriptions_RepairKit", "client\icons\briefcase.paa", 500, 250],
-	["Jerry Can (Full)", "jerrycanfull", localize "STR_WL_ShopDescriptions_fuelFull", "client\icons\jerrycan.paa", 150, 75],
-	["Jerry Can (Empty)", "jerrycanempty", localize "STR_WL_ShopDescriptions_fuelEmpty", "client\icons\jerrycan.paa", 50, 25],
-	["Spawn Beacon", "spawnbeacon", localize "STR_WL_ShopDescriptions_spawnBeacon", "client\icons\spawnbeacon.paa", 1500, 750],
-	["Camo Net", "camonet", localize "STR_WL_ShopDescriptions_Camo", "client\icons\camonet.paa", 200, 100],
-	["Syphon Hose", "syphonhose", localize "STR_WL_ShopDescriptions_SyphonHose", "client\icons\syphonhose.paa", 200, 100],
-	["Energy Drink", "energydrink", localize "STR_WL_ShopDescriptions_Energy_Drink", "client\icons\energydrink.paa", 100, 50],
-	["Warchest", "warchest", localize "STR_WL_ShopDescriptions_Warchest", "client\icons\warchest.paa", 1000, 500, "HIDDEN"] 
+	["UTILIDADES", "", 0, ""],
+    ["Spawn Beacon", "spawnbeacon", localize "STR_WL_ShopDescriptions_spawnBeacon", "client\icons\spawnbeacon.paa", 9500, 1000],
+	["Tenda Camuflada", "camonet", localize "STR_WL_ShopDescriptions_Camo", "client\icons\camonet.paa", 200, 100],
+	//["Warchest", "warchest", localize "STR_WL_ShopDescriptions_Warchest", "client\icons\warchest.paa", 1000, 500]
+	["Suporte de Artilharia", "artillery", "", "client\icons\tablet.paa", 100000, 10000, "HIDDEN"],
+    ["======================================================", "", 0, ""],
+
+	["COMIDAS", "", 0, ""],
+	["Garrafa d`agua", "water", localize "STR_WL_ShopDescriptions_Water", "client\icons\waterbottle.paa", 100, 75],
+	["Lata de Comida", "cannedfood", localize "STR_WL_ShopDescriptions_CanFood", "client\icons\cannedfood.paa", 100, 75],
+	["Energético", "energydrink", localize "STR_WL_ShopDescriptions_Energy_Drink", "client\icons\energydrink.paa", 2000, 1000],
+	["======================================================", "", 0, ""],
+
+	["FERRAMENTAS DE CARROS", "", 0, ""],
+	["Kit de Reparo", "repairkit", localize "STR_WL_ShopDescriptions_RepairKit", "client\icons\briefcase.paa", 500, 250],
+	["TravaCarro", "pinlock", localize "STR_WL_ShopDescriptions_Pinlock", "client\icons\keypad.paa", 250, 50],
+	["Cifão de Combustível", "syphonhose", localize "STR_WL_ShopDescriptions_SyphonHose", "client\icons\syphonhose.paa", 200, 100],
+	["Galão Combustível (Cheio)", "jerrycanfull", localize "STR_WL_ShopDescriptions_fuelFull", "client\icons\jerrycan.paa", 150, 75],
+	["Galão Combustível (Vazio)", "jerrycanempty", localize "STR_WL_ShopDescriptions_fuelEmpty", "client\icons\jerrycan.paa", 50, 25],
+	["======================================================", "", 0, ""],
+
+    ["DROGAS", "", 0, ""],
+	["LSD", "lsd", localize "STR_WL_ShopDescriptions_LSD", "client\icons\lsd.paa", 1500, 1000],
+	["Cannabis", "marijuana", localize "STR_WL_ShopDescriptions_Marijuana", "client\icons\marijuana.paa", 2500, 1500],
+	["Cocaina", "cocaine", localize "STR_WL_ShopDescriptions_Cocaine", "client\icons\cocaine.paa", 2500, 2000],
+	["Heroina", "heroin", localize "STR_WL_ShopDescriptions_Heroin", "client\icons\heroin.paa", 3000, 2500]
 ];
 
 call compile preprocessFileLineNumbers "mapConfig\storeOwners.sqf";
