@@ -175,7 +175,7 @@ A3W_hostileairMissionTimeout = 2*60;    // Time in seconds that a Main Mission w
 
 A3W_aquaticMissionDelay = 1*60;      // Time in seconds between Main Missions
 A3W_aquaticMissionTimeout = 5*60;    // Time in seconds that a Main Mission will run for, unless completed
-//###############################################################################################################################//
+//###############################################################################################################################
 A3W_hackedMissionDlSize = 165072;	// File size in Kilobytles (~1Mbps dl Rate)
 A3W_hackedMissionPercentage = 0.05; // Percentage to come out of bankaccounts
 A3W_hackedMissionExtraFixMoney = 30000;	// Fix extra money for successfully download

@@ -12,5 +12,5 @@ _player addRating 1e11;
 [objNull, _player] call mf_player_actions_refresh;
 [] execVM "client\functions\playerActions.sqf";
 
-_player groupChat "Wasteland - Initialization Complete";
+_player groupChat "Anônimos Servidores Arma 3 - Iniciando sua sessão! Obrigado pela preferência";
 playerSetupComplete = true;
