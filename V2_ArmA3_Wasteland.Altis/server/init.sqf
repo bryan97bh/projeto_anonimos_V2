@@ -553,4 +553,22 @@ if !(["A3W_hcObjCleanup"] call isConfigOn) then
 	execVM "server\WastelandServClean.sqf";
 };
 
-//[] execVM "addons\statusBar\fn_aj_s_refreshTime.sqf";
+[] execVM "addons\statusBar\fn_aj_s_refreshTime.sqf";
+_null = [] execVM "server\RespawnAi\RespawnAI1.sqf";
+_null = [] execVM "server\RespawnAi\RespawnAI2.sqf";
+_null = [] execVM "server\RespawnAi\RespawnAI3.sqf";
+_null = [] execVM "server\RespawnAi\RespawnAI4.sqf";
+_null = [] execVM "server\RespawnAi\RespawnAI5.sqf";
+_null = [] execVM "server\RespawnAi\RespawnAI6.sqf";
+_null = [] execVM "server\RespawnAi\RespawnAI7.sqf";
+_null = [] execVM "server\RespawnAi\RespawnAI8.sqf";
+_null = [] execVM "server\RespawnAi\RespawnAI9.sqf";
+_null = [] execVM "server\RespawnAi\RespawnAI10.sqf";
+_null = [] execVM "server\RespawnAi\RespawnAI11.sqf";
+_null = [] execVM "server\RespawnAi\RespawnAI12.sqf";
+_null = [] execVM "server\RespawnAi\RespawnAI13.sqf";
+_null = [] execVM "server\RespawnAi\RespawnAI14.sqf";
+_null = [] execVM "server\RespawnAi\RespawnAI15.sqf";
+/*_null = [] execVM "server\RespawnAi\RespawnAILZ.sqf";
+_null = [] execVM "server\RespawnAi\RespawnAIr1.sqf";
+_null = [] execVM "server\RespawnAi\RespawnAIr2.sqf";*/
