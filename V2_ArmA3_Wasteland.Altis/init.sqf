@@ -98,6 +98,7 @@ if (hasInterface || isServer) then
 	[] execVM "addons\stickyCharges\init.sqf";
 	[] execVM "addons\HvT\HvT.sqf"; // High Value Money
 	[] execVM "addons\HvT\HvD.sqf"; // High Value Drugrunner
+	[] execVM "addons\APOC_Airdrop_Assistance\init.sqf";
 	[] execVM "addons\playerCustomUniforms\playerCustomUniforms.sqf";
 	[] execVM "scarCODE\ServerInfoMenu\sqf\initLocal.sqf"; // scarCODE ServerInfoMenu
 	[] execVM "scarCODE\ServerInfoMenu2\sqf\initLocal.sqf"; // scarCODE ServerInfoMenu
