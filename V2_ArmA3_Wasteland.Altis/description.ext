@@ -132,6 +132,7 @@ class CfgSounds
 {
 	sounds[] = {};
 	#include "client\CfgSounds.hpp"
+	#include "addons\beacondetector\sound\cfgsounds_beaconDetector.hpp"
 };
 
 class CfgRemoteExec // applies only to clients
