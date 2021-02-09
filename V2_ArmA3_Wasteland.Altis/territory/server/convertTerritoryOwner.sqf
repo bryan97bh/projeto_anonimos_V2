@@ -4,7 +4,7 @@
 //	@file Name: convertTerritoryOwner.sqf
 //	@file Author: AgentRev
 
-private ["_newTerritories", "_newGroup", "_territory"];
+private ["_new", "_newGroup", "_territory"];
 
 _newTerritories = _this select 0;
 _newGroup = _this select 1;
